@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a19c272-055e-4b78-92f3-f2b98a29b406" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/constants/RabbitMQConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dtos/RegistroPontoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/TipoRegistroPonto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/PontoApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/PontoApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/application/usecases/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/application/usecases/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/UserSS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/security/UserSS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/tokenConfig/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/tokenConfig/SecurityFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/tokenConfig/TokenAccessUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/config/tokenConfig/TokenAccessUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/core/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PontoAPI/src/main/java/com/eletronico/pontoapi/core/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProcessamentoPontos/src/main/java/com/samuelm/processamentopontos/application/usecases/RegistroPontoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ProcessamentoPontos/src/main/java/com/samuelm/processamentopontos/application/usecases/RegistroPontoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RegistroDePonto/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RegistroDePonto/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RegistroDePonto/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RegistroDePonto/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RegistroDePonto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RegistroDePonto/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RegistroDePonto/src/main/java/com/samuelm/registrodeponto/configs/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RegistroDePonto/src/main/java/com/samuelm/registrodeponto/configs/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RegistroDePonto/target/classes/com/samuelm/registrodeponto/configs/RabbitMQConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/../RegistroDePonto/target/classes/com/samuelm/registrodeponto/configs/RabbitMQConfig.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -45,6 +50,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Samuel/Documents/ponto-api/ProcessamentoPontos&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,6 +74,9 @@
       <workItem from="1730157803102" duration="5053000" />
       <workItem from="1730194482026" duration="1401000" />
       <workItem from="1730249529012" duration="2514000" />
+      <workItem from="1730330338915" duration="778000" />
+      <workItem from="1730674528661" duration="602000" />
+      <workItem from="1730711620720" duration="173000" />
     </task>
     <servers />
   </component>

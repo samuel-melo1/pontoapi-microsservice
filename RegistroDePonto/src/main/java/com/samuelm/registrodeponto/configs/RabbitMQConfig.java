@@ -11,7 +11,9 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static constants.RabbitMQConstants.*;
+import static constants.RabbitMQConstants.EXG_NAME_REGISTROPONTO;
+import static constants.RabbitMQConstants.QUEUE_REGISTRO_PONTO;
+import static constants.RabbitMQConstants.RK_REGISTRO_PONTO;
 
 @Configuration
 public class RabbitMQConfig {

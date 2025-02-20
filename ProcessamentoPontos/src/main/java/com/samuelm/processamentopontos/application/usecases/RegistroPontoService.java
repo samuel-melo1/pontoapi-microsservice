@@ -30,6 +30,8 @@ public class RegistroPontoService implements IRegistroPontoService {
         RegistroPonto newPonto = new RegistroPonto();
         BeanUtils.copyProperties(dto, newPonto);
 
+        System.out.println(newPonto);
+        
         repository.save(newPonto);
     }
 }
