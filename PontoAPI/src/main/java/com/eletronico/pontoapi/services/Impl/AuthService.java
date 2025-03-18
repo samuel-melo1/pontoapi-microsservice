@@ -1,16 +1,14 @@
-package com.eletronico.pontoapi.application.usecases;
+package com.eletronico.pontoapi.services.Impl;
 
 import com.eletronico.pontoapi.config.tokenConfig.TokenAccessUser;
 import com.eletronico.pontoapi.config.tokenConfig.TokenVO;
 import com.eletronico.pontoapi.entrypoint.dto.request.AuthenticationDTO;
-import com.eletronico.pontoapi.infrastructure.persistence.UserRepository;
+import com.eletronico.pontoapi.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

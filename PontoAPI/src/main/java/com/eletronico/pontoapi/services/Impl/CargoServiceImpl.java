@@ -1,28 +1,26 @@
-package com.eletronico.pontoapi.application.usecases;
+package com.eletronico.pontoapi.services.Impl;
 
-import com.eletronico.pontoapi.core.domain.User;
 import com.eletronico.pontoapi.core.exceptions.DataIntegrityException;
 import com.eletronico.pontoapi.core.exceptions.ObjectAlreadyExistException;
 import com.eletronico.pontoapi.core.exceptions.ObjectNotFoundException;
-import com.eletronico.pontoapi.infrastructure.persistence.CargoRepository;
+import com.eletronico.pontoapi.persistence.CargoRepository;
+import com.eletronico.pontoapi.services.CargoService;
 import com.eletronico.pontoapi.utils.MapperDTO;
 import com.eletronico.pontoapi.core.domain.Cargo;
 import com.eletronico.pontoapi.entrypoint.dto.request.CargoDTO;
-import com.eletronico.pontoapi.application.gateways.CargoService;
+
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.eletronico.pontoapi.core.enums.CargoExceptionStatusError.*;

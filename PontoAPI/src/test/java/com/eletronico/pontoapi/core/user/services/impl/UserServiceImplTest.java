@@ -1,36 +1,12 @@
 package com.eletronico.pontoapi.core.user.services.impl;
 
-import com.eletronico.pontoapi.core.domain.Departamento;
-import com.eletronico.pontoapi.infrastructure.persistence.UserRepository;
-import com.eletronico.pontoapi.application.usecases.UserServiceImpl;
-import com.eletronico.pontoapi.core.domain.Cargo;
-import com.eletronico.pontoapi.core.domain.Role;
-import com.eletronico.pontoapi.core.domain.User;
-import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
-import com.eletronico.pontoapi.core.enums.UserRole;
-import com.eletronico.pontoapi.core.exceptions.NotPermitDisableAdmException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static com.eletronico.pontoapi.core.enums.UserExceptionStatusError.NOT_EXIST;
 
 @SpringBootTest
 @ContextConfiguration

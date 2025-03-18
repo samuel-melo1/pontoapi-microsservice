@@ -1,4 +1,4 @@
-package com.eletronico.pontoapi.infrastructure.persistence;
+package com.eletronico.pontoapi.persistence;
 
 import com.eletronico.pontoapi.core.domain.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;

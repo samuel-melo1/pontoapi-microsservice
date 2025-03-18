@@ -3,13 +3,8 @@ package com.eletronico.pontoapi.config.tokenConfig;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.eletronico.pontoapi.application.usecases.UserServiceImpl;
-import com.eletronico.pontoapi.core.domain.User;
 import com.eletronico.pontoapi.core.exceptions.InvalidJwtAuthenticationException;
-import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
-import com.eletronico.pontoapi.infrastructure.persistence.UserRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.*;
 
 import static com.eletronico.pontoapi.entrypoint.dto.response.InvalidJwtResponseError.EMAIL_OR_PASSWORD_INVALID;
@@ -111,9 +103,6 @@ public class TokenAccessUser {
         } catch (Exception e) {
             throw new InvalidJwtAuthenticationException(EMAIL_OR_PASSWORD_INVALID);
         }
-    }
-    public Instant genExpirationDate(){
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 
 }

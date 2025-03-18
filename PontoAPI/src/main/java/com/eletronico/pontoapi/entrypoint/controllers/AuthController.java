@@ -1,12 +1,11 @@
-package com.eletronico.pontoapi.infrastructure.controllers;
+package com.eletronico.pontoapi.entrypoint.controllers;
 
-import com.eletronico.pontoapi.application.usecases.AuthService;
+import com.eletronico.pontoapi.services.Impl.AuthService;
 import com.eletronico.pontoapi.entrypoint.dto.request.AuthenticationDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

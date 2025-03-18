@@ -1,39 +1,34 @@
-package com.eletronico.pontoapi.application.usecases;
+package com.eletronico.pontoapi.services.Impl;
 
-import com.eletronico.pontoapi.application.gateways.CargoService;
-import com.eletronico.pontoapi.application.gateways.DepartamentoService;
+
 import com.eletronico.pontoapi.core.domain.Cargo;
 import com.eletronico.pontoapi.core.domain.Departamento;
 import com.eletronico.pontoapi.core.exceptions.DataIntegrityException;
-import com.eletronico.pontoapi.core.exceptions.ObjectAlreadyExistException;
 import com.eletronico.pontoapi.core.exceptions.ObjectNotFoundException;
 import com.eletronico.pontoapi.entrypoint.dto.request.CargoDTO;
 import com.eletronico.pontoapi.entrypoint.dto.request.DepartamentoDTO;
-import com.eletronico.pontoapi.infrastructure.persistence.UserRepository;
+import com.eletronico.pontoapi.persistence.UserRepository;
+import com.eletronico.pontoapi.services.CargoService;
+import com.eletronico.pontoapi.services.DepartamentoService;
+import com.eletronico.pontoapi.services.UserService;
 import com.eletronico.pontoapi.utils.MapperDTO;
 import com.eletronico.pontoapi.core.domain.User;
 import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
-import com.eletronico.pontoapi.application.gateways.UserService;
+
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.eletronico.pontoapi.core.enums.DataIntegrityViolationError.CPF_ALREADY_EXIST;
 import static com.eletronico.pontoapi.core.enums.DataIntegrityViolationError.EMAIL_ALREADY_EXIST;
-import static com.eletronico.pontoapi.core.enums.UserExceptionStatusError.ALREDY_EXIST;
 import static com.eletronico.pontoapi.core.enums.UserExceptionStatusError.NOT_EXIST;
 
 @Service

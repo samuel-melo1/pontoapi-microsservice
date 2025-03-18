@@ -1,5 +1,6 @@
 package com.eletronico.pontoapi;
 
+import com.eletronico.pontoapi.config.security.UserSS;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +21,6 @@ public class PontoApiApplication {
 
         Locale.setDefault(new Locale("pt", "BR"));
         SpringApplication.run(PontoApiApplication.class, args);
-
-
     }
 
 }

@@ -1,7 +1,8 @@
-package com.eletronico.pontoapi.infrastructure.controllers;
+package com.eletronico.pontoapi.entrypoint.controllers;
 
 import com.eletronico.pontoapi.entrypoint.dto.request.DepartamentoDTO;
-import com.eletronico.pontoapi.application.gateways.DepartamentoService;
+
+import com.eletronico.pontoapi.services.DepartamentoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

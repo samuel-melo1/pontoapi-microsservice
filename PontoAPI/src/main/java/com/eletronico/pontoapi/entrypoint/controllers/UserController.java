@@ -1,7 +1,8 @@
-package com.eletronico.pontoapi.infrastructure.controllers;
+package com.eletronico.pontoapi.entrypoint.controllers;
 
 import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
-import com.eletronico.pontoapi.application.gateways.UserService;
+
+import com.eletronico.pontoapi.services.UserService;
 import com.eletronico.pontoapi.utils.validation.OnCreate;
 import com.eletronico.pontoapi.utils.validation.OnUpdate;
 import jakarta.validation.Valid;
@@ -47,13 +48,19 @@ public class UserController {
     public ResponseEntity<Optional<UserDTO>> findByID(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.findUserById(id));
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Optional<UserDTO>> findByEmail(@PathVariable("email") String email){
+        return ResponseEntity.ok(service.findUserByEmail(email));
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> update(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
+    public ResponseEntity<UserDTO> update(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
         return ResponseEntity.ok(service.update(dto, id));
     }
 

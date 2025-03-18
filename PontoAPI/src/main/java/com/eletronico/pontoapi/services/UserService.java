@@ -1,4 +1,4 @@
-package com.eletronico.pontoapi.application.gateways;
+package com.eletronico.pontoapi.services;
 
 import com.eletronico.pontoapi.core.domain.User;
 import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;

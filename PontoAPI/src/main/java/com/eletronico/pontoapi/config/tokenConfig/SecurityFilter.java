@@ -1,5 +1,7 @@
 package com.eletronico.pontoapi.config.tokenConfig;
 
+import com.eletronico.pontoapi.config.security.UserSS;
+import com.eletronico.pontoapi.core.domain.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             Authentication auth = tokenService.getAuthentication(token);
             if(auth != null){
                 SecurityContextHolder.getContext().setAuthentication(auth);
+
             }
         }
         filterChain.doFilter(request,response);

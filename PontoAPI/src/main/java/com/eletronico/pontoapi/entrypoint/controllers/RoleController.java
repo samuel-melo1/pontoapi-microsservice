@@ -1,7 +1,7 @@
-package com.eletronico.pontoapi.infrastructure.controllers;
+package com.eletronico.pontoapi.entrypoint.controllers;
 
 import com.eletronico.pontoapi.entrypoint.dto.request.RoleDTO;
-import com.eletronico.pontoapi.application.gateways.RoleService;
+import com.eletronico.pontoapi.services.RoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

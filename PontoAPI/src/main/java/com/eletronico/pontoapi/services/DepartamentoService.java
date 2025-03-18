@@ -1,5 +1,4 @@
-package com.eletronico.pontoapi.application.gateways;
-
+package com.eletronico.pontoapi.services;
 
 import com.eletronico.pontoapi.core.domain.Departamento;
 import com.eletronico.pontoapi.entrypoint.dto.request.DepartamentoDTO;
