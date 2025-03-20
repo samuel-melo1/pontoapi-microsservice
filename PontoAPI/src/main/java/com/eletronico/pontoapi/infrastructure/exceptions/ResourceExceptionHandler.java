@@ -25,30 +25,39 @@ import java.util.stream.Collectors;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ObjectAlreadyExistException.class)
-    private ResponseEntity<RestErrorMessage> objectAlreadyExistException(ObjectAlreadyExistException exception, HttpServletRequest request) {
-        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(), exception.getMessage(), request.getRequestURI());
+    private ResponseEntity<RestErrorMessage> objectAlreadyExistException(ObjectAlreadyExistException exception,
+                                                                         HttpServletRequest request) {
+        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(),
+                                                    exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(exception.getStatus()).body(err);
     }
     @ExceptionHandler(DataIntegrityException.class)
-    private ResponseEntity<RestErrorMessage> dataIntegrityException(DataIntegrityException exception, HttpServletRequest request) {
-        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getHttpStatus().value(), exception.getMessage(), request.getRequestURI());
+    private ResponseEntity<RestErrorMessage> dataIntegrityException(DataIntegrityException exception,
+                                                                    HttpServletRequest request) {
+        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getHttpStatus().value(),
+                                                    exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(exception.getHttpStatus().value()).body(err);
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    private ResponseEntity<RestErrorMessage> objectNotFoundException(ObjectNotFoundException exception, HttpServletRequest request) {
-        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(), exception.getMessage(), request.getRequestURI());
+    private ResponseEntity<RestErrorMessage> objectNotFoundException(ObjectNotFoundException exception,
+                                                                     HttpServletRequest request) {
+        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(),
+                                                    exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(exception.getStatus().value()).body(err);
     }
 
     @ExceptionHandler(InvalidJwtAuthenticationException.class)
-    private ResponseEntity<RestErrorMessage> invalidJwtAuthenticationException(InvalidJwtAuthenticationException exception, HttpServletRequest request) {
-        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(),exception.getMessage(), request.getRequestURI());
+    private ResponseEntity<RestErrorMessage> invalidJwtAuthenticationException(
+            InvalidJwtAuthenticationException exception, HttpServletRequest request) {
+        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getStatus().value(),
+                                                    exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<RestErrorMessage> handleInvalidCredentialsException(BadCredentialsException ex, HttpServletRequest request) {
+    public ResponseEntity<RestErrorMessage> handleInvalidCredentialsException(
+            BadCredentialsException ex, HttpServletRequest request) {
         return new ResponseEntity<RestErrorMessage>(
                 new RestErrorMessage(Instant.now(), HttpStatus.BAD_REQUEST.value(), "Email ou senha inválidos!",
                         request.getRequestURI()), HttpStatus.UNAUTHORIZED);
@@ -60,8 +69,10 @@ public class ResourceExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(NotPermitDeleteAdmException.class)
-    private ResponseEntity<RestErrorMessage> notPermitDeleteException(NotPermitDeleteAdmException exception, HttpServletRequest request) {
-        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getHttpStatus().value(), exception.getMessage(), request.getRequestURI());
+    private ResponseEntity<RestErrorMessage> notPermitDeleteException(NotPermitDeleteAdmException exception,
+                                                                      HttpServletRequest request) {
+        RestErrorMessage err = new RestErrorMessage(Instant.now(), exception.getHttpStatus().value(),
+                                                    exception.getMessage(), request.getRequestURI());
         return ResponseEntity.status(exception.getHttpStatus().value()).body(err);
     }
     @ExceptionHandler(NotPermitDisableAdmException.class)

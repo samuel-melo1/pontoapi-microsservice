@@ -6,11 +6,9 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Getter
 @Setter
 public class UserSS implements UserDetails {
@@ -19,8 +17,6 @@ public class UserSS implements UserDetails {
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-
-
     public UserSS(Integer id, String email, String password, List<Role> permissions ) {
         this.id = id;
         this.email = email;
@@ -61,15 +57,5 @@ public class UserSS implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UserSS{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", authorities=" + authorities +
-                '}';
     }
 }

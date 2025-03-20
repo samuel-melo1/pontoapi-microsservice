@@ -26,7 +26,6 @@ public class SecurityConfig {
         this.securityFilter = securityFilter;
         this.tokenAccessUser = tokenAccessUser;
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 

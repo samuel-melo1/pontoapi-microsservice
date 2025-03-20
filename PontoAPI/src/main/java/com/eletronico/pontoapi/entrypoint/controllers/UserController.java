@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private UserService service;
     @PostMapping("/create")
-    public ResponseEntity<Object> saveUser(@Validated(OnCreate.class) @RequestBody @Valid  UserDTO userDTO) {
+    public ResponseEntity<Object> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
         URI uri = ServletUriComponentsBuilder.
                 fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId_user()).toUri();
         return ResponseEntity.created(uri).body(service.saveUser(userDTO));

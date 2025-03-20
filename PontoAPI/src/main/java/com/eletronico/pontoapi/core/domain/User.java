@@ -26,7 +26,7 @@ import java.util.List;
 @Data
 @Builder
 @Table(name = "users")
-public class User implements  Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
