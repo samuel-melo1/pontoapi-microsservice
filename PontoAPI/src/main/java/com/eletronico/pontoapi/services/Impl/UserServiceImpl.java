@@ -3,6 +3,7 @@ package com.eletronico.pontoapi.services.Impl;
 
 import com.eletronico.pontoapi.core.domain.Cargo;
 import com.eletronico.pontoapi.core.domain.Departamento;
+import com.eletronico.pontoapi.core.domain.Role;
 import com.eletronico.pontoapi.core.exceptions.DataIntegrityException;
 import com.eletronico.pontoapi.core.exceptions.ObjectNotFoundException;
 import com.eletronico.pontoapi.entrypoint.dto.request.CargoDTO;
@@ -23,6 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import static com.eletronico.pontoapi.core.enums.DataIntegrityViolationError.CPF_ALREADY_EXIST;
@@ -41,6 +45,8 @@ public class UserServiceImpl implements UserService {
     private CargoService cargoService;
     @Autowired
     private DepartamentoService departamentoService;
+    @Autowired
+    private RoleServiceImpl roleService;
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class.getName());
 
     @Transactional
@@ -48,11 +54,16 @@ public class UserServiceImpl implements UserService {
     public UserDTO saveUser(UserDTO userDTO) {
         LOG.info("creating a new user");
         userDTO.setId_user(null);
+        List<Role> newList = new ArrayList<>();
 
         Optional<CargoDTO> cargoObj = cargoService.findById(userDTO.getCargo().getId_cargo());
         Optional<DepartamentoDTO> departamentoObj = departamentoService.findById(userDTO.getDepartamento().getId_departamento());
 
-        validaPorCpfEEmail(userDTO);
+        for(Role roles: userDTO.getPermissions()){
+            newList.add(MapperDTO.parseObject(roleService.findById(roles.getId_role()), Role.class));
+        }
+
+        validToEmailAndCpf(userDTO);
         User newUser = User.builder()
                 .email(userDTO.getEmail())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
@@ -62,17 +73,15 @@ public class UserServiceImpl implements UserService {
                 .cargo(MapperDTO.parseObject(cargoObj, Cargo.class))
                 .departamento(MapperDTO.parseObject(departamentoObj, Departamento.class))
                 .name(userDTO.getName())
-                .permissions(userDTO.getPermissions()).build();
+                .permissions(newList).build();
 
         return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
     }
-
     @Override
     public List<UserDTO> listUser(Integer page, Integer pageSize) {
         return MapperDTO.parseListObjects(
                 userRepository.findAll(PageRequest.of(page, pageSize)).toList(), UserDTO.class);
     }
-
     @Override
     public Optional<UserDTO> findUserByEmail(String email) {
         LOG.info("find users by email");
@@ -80,21 +89,12 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ObjectNotFoundException(NOT_EXIST)));
         return Optional.of(MapperDTO.parseObject(Optional.of(userExist.get()), UserDTO.class));
     }
-
     @Override
     public Optional<UserDTO> findUserById(Integer id) {
         LOG.info("find users by id");
         var userExist = Optional.ofNullable(userRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(NOT_EXIST)));
         return Optional.ofNullable(MapperDTO.parseObject(Optional.of(userExist.get()), UserDTO.class));
-    }
-
-    @Transactional
-    @Override
-    public void delete(Integer id) {
-        LOG.info("delete users by id");
-        var user = findUserById(id);
-        userRepository.deleteById(user.get().getId_user());
     }
 
     @Override
@@ -108,13 +108,12 @@ public class UserServiceImpl implements UserService {
         if (!userDTO.getPassword().equals(oldUser.get().getPassword())) {
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         }
-        validaPorCpfEEmail(userDTO);
+        validToEmailAndCpf(userDTO);
 
         User newUser = new User();
         BeanUtils.copyProperties(userDTO, newUser);
         return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
     }
-
     @Transactional
     public void disableUser(Integer id_user) {
         var entityUser = userRepository.findById(id_user)
@@ -123,8 +122,7 @@ public class UserServiceImpl implements UserService {
         entityUser.setStatus(false);
         MapperDTO.parseObject(userRepository.save(entityUser), UserDTO.class);
     }
-
-    private void validaPorCpfEEmail(UserDTO dto) {
+    private void validToEmailAndCpf(UserDTO dto) {
         Optional<User> obj = userRepository.findByCpf(dto.getCpf());
         if (obj.isPresent() && obj.get().getId_user() != dto.getId_user()) {
             throw new DataIntegrityException(CPF_ALREADY_EXIST);
@@ -133,6 +131,5 @@ public class UserServiceImpl implements UserService {
         if (obj.isPresent() && obj.get().getId_user() != dto.getId_user()) {
             throw new DataIntegrityException(EMAIL_ALREADY_EXIST);
         }
-
     }
 }

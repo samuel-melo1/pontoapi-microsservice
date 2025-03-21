@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

@@ -12,9 +12,6 @@ public interface UserService {
     List<UserDTO> listUser(Integer page, Integer pageSize);
 
     Optional<UserDTO> findUserByEmail(String email);
-
-    void delete(Integer id);
-
     UserDTO update(UserDTO dto, Integer id);
 
     void disableUser(Integer id_user);

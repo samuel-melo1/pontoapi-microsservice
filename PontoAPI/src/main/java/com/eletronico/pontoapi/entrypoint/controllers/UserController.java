@@ -1,7 +1,6 @@
 package com.eletronico.pontoapi.entrypoint.controllers;
 
 import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
-
 import com.eletronico.pontoapi.services.UserService;
 import com.eletronico.pontoapi.utils.validation.OnCreate;
 import com.eletronico.pontoapi.utils.validation.OnUpdate;
@@ -26,19 +25,17 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+
     @Autowired
     private UserService service;
+
     @PostMapping("/create")
-    public ResponseEntity<Object> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<UserDTO> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
         URI uri = ServletUriComponentsBuilder.
                 fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId_user()).toUri();
         return ResponseEntity.created(uri).body(service.saveUser(userDTO));
     }
-    @PutMapping("/disable/{id}")
-    public ResponseEntity<Object> disable(@PathVariable("id") Integer id) {
-        service.disableUser(id);
-        return ResponseEntity.noContent().build();
-    }
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
@@ -48,17 +45,17 @@ public class UserController {
     public ResponseEntity<Optional<UserDTO>> findByID(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.findUserById(id));
     }
-
-    @GetMapping("/email/{email}")
-    public ResponseEntity<Optional<UserDTO>> findByEmail(@PathVariable("email") String email){
+    @GetMapping("/emails/")
+    public ResponseEntity<Optional<UserDTO>> findByEmail(@RequestParam("email") String email){
         return ResponseEntity.ok(service.findUserByEmail(email));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
-        service.delete(id);
+    @PutMapping("/disable/{id}")
+    public ResponseEntity<Object> disable(@PathVariable("id") Integer id) {
+        service.disableUser(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDTO> update(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
         return ResponseEntity.ok(service.update(dto, id));
