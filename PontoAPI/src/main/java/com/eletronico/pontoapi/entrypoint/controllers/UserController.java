@@ -31,9 +31,10 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<UserDTO> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
+        int id_user = service.saveUser(userDTO);
         URI uri = ServletUriComponentsBuilder.
-                fromCurrentRequest().path("/{id}").buildAndExpand(userDTO.getId_user()).toUri();
-        return ResponseEntity.created(uri).body(service.saveUser(userDTO));
+                fromCurrentRequest().path("/{id}").buildAndExpand(id_user).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @GetMapping

@@ -41,27 +41,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private CargoService cargoService;
-    @Autowired
-    private DepartamentoService departamentoService;
-    @Autowired
-    private RoleServiceImpl roleService;
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class.getName());
 
     @Transactional
     @Override
-    public UserDTO saveUser(UserDTO userDTO) {
+    public Integer saveUser(UserDTO userDTO) {
         LOG.info("creating a new user");
         userDTO.setId_user(null);
-        List<Role> newList = new ArrayList<>();
-
-        Optional<CargoDTO> cargoObj = cargoService.findById(userDTO.getCargo().getId_cargo());
-        Optional<DepartamentoDTO> departamentoObj = departamentoService.findById(userDTO.getDepartamento().getId_departamento());
-
-        for(Role roles: userDTO.getPermissions()){
-            newList.add(MapperDTO.parseObject(roleService.findById(roles.getId_role()), Role.class));
-        }
 
         validToEmailAndCpf(userDTO);
         User newUser = User.builder()
@@ -70,12 +56,12 @@ public class UserServiceImpl implements UserService {
                 .telefone(userDTO.getTelefone())
                 .status(true)
                 .cpf(userDTO.getCpf())
-                .cargo(MapperDTO.parseObject(cargoObj, Cargo.class))
-                .departamento(MapperDTO.parseObject(departamentoObj, Departamento.class))
+                .cargo(userDTO.getCargo())
+                .departamento(userDTO.getDepartamento())
                 .name(userDTO.getName())
-                .permissions(newList).build();
-
-        return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
+                .permissions(userDTO.getPermissions()).build();
+        userRepository.save(newUser);
+        return newUser.getId_user();
     }
     @Override
     public List<UserDTO> listUser(Integer page, Integer pageSize) {

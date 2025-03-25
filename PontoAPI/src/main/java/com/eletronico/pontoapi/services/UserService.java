@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    UserDTO saveUser(UserDTO dto);
+    Integer saveUser(UserDTO dto);
 
     List<UserDTO> listUser(Integer page, Integer pageSize);
 
