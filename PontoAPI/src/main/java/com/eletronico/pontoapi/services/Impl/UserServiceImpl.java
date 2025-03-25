@@ -1,16 +1,8 @@
 package com.eletronico.pontoapi.services.Impl;
 
-
-import com.eletronico.pontoapi.core.domain.Cargo;
-import com.eletronico.pontoapi.core.domain.Departamento;
-import com.eletronico.pontoapi.core.domain.Role;
 import com.eletronico.pontoapi.core.exceptions.DataIntegrityException;
 import com.eletronico.pontoapi.core.exceptions.ObjectNotFoundException;
-import com.eletronico.pontoapi.entrypoint.dto.request.CargoDTO;
-import com.eletronico.pontoapi.entrypoint.dto.request.DepartamentoDTO;
 import com.eletronico.pontoapi.persistence.UserRepository;
-import com.eletronico.pontoapi.services.CargoService;
-import com.eletronico.pontoapi.services.DepartamentoService;
 import com.eletronico.pontoapi.services.UserService;
 import com.eletronico.pontoapi.utils.MapperDTO;
 import com.eletronico.pontoapi.core.domain.User;
@@ -24,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import static com.eletronico.pontoapi.core.enums.DataIntegrityViolationError.CPF_ALREADY_EXIST;
@@ -99,14 +88,6 @@ public class UserServiceImpl implements UserService {
         User newUser = new User();
         BeanUtils.copyProperties(userDTO, newUser);
         return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
-    }
-    @Transactional
-    public void disableUser(Integer id_user) {
-        var entityUser = userRepository.findById(id_user)
-                .orElseThrow(() -> new ObjectNotFoundException(NOT_EXIST));
-
-        entityUser.setStatus(false);
-        MapperDTO.parseObject(userRepository.save(entityUser), UserDTO.class);
     }
     private void validToEmailAndCpf(UserDTO dto) {
         Optional<User> obj = userRepository.findByCpf(dto.getCpf());

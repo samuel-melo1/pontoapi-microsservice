@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserDTO> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
         int id_user = service.saveUser(userDTO);
         URI uri = ServletUriComponentsBuilder.
@@ -42,23 +41,18 @@ public class UserController {
                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok().body(service.listUser(page, size));
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<UserDTO>> findByID(@PathVariable("id") Integer id){
+    @GetMapping("/{userId}")
+    public ResponseEntity<Optional<UserDTO>> findByID(@PathVariable("userId") Integer id){
         return ResponseEntity.ok(service.findUserById(id));
     }
-    @GetMapping("/emails/")
+
+    @GetMapping("/emails")
     public ResponseEntity<Optional<UserDTO>> findByEmail(@RequestParam("email") String email){
         return ResponseEntity.ok(service.findUserByEmail(email));
     }
 
-    @PutMapping("/disable/{id}")
-    public ResponseEntity<Object> disable(@PathVariable("id") Integer id) {
-        service.disableUser(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<UserDTO> update(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
         return ResponseEntity.ok(service.update(dto, id));
     }
 

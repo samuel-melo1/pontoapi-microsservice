@@ -14,7 +14,5 @@ public interface UserService {
     Optional<UserDTO> findUserByEmail(String email);
     UserDTO update(UserDTO dto, Integer id);
 
-    void disableUser(Integer id_user);
-
     Optional<UserDTO> findUserById(Integer id);
 }
