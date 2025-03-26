@@ -1,6 +1,7 @@
 package com.eletronico.pontoapi.entrypoint.controllers;
 
 import com.eletronico.pontoapi.entrypoint.dto.request.UserDTO;
+import com.eletronico.pontoapi.entrypoint.dto.response.UserDTOResponse;
 import com.eletronico.pontoapi.services.UserService;
 import com.eletronico.pontoapi.utils.validation.OnCreate;
 import com.eletronico.pontoapi.utils.validation.OnUpdate;
@@ -39,16 +40,16 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok().body(service.listUser(page, size));
+        return ResponseEntity.ok().body(service.findAll(page, size));
     }
     @GetMapping("/{userId}")
-    public ResponseEntity<Optional<UserDTO>> findByID(@PathVariable("userId") Integer id){
-        return ResponseEntity.ok(service.findUserById(id));
+    public ResponseEntity<Optional<UserDTOResponse>> findByID(@PathVariable("userId") Integer id){
+        return ResponseEntity.ok(service.findById(id));
     }
 
     @GetMapping("/emails")
     public ResponseEntity<Optional<UserDTO>> findByEmail(@RequestParam("email") String email){
-        return ResponseEntity.ok(service.findUserByEmail(email));
+        return ResponseEntity.ok(service.findByEmail(email));
     }
 
     @PutMapping("/{id}")
