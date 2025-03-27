@@ -36,9 +36,8 @@ public class UserController {
                 fromCurrentRequest().path("/{id}").buildAndExpand(id_user).toUri();
         return ResponseEntity.created(uri).build();
     }
-
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+    public ResponseEntity<List<UserDTOResponse>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok().body(service.findAll(page, size));
     }
@@ -47,14 +46,9 @@ public class UserController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping("/emails")
-    public ResponseEntity<Optional<UserDTO>> findByEmail(@RequestParam("email") String email){
-        return ResponseEntity.ok(service.findByEmail(email));
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer id) {
-        return ResponseEntity.ok(service.update(dto, id));
+    public ResponseEntity<UserDTO> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer cpf) {
+        return ResponseEntity.ok(service.update(dto, cpf));
     }
 
 }

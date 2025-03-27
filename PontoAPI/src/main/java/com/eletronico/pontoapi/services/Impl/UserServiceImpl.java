@@ -38,7 +38,9 @@ public class UserServiceImpl implements UserService {
     public Integer saveUser(UserDTO userDTO) {
         userDTO.setId_user(null);
 
-        validToEmailAndCpf(userDTO);
+        validCpf(userDTO);
+        validEmail(userDTO);
+
         User newUser = User.builder()
                 .email(userDTO.getEmail())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
@@ -53,20 +55,15 @@ public class UserServiceImpl implements UserService {
         return newUser.getId_user();
     }
     @Override
-    public List<UserDTO> findAll(Integer page, Integer pageSize) {
+    public List<UserDTOResponse> findAll(Integer page, Integer pageSize) {
         return MapperDTO.parseListObjects(
-                userRepository.findAll(PageRequest.of(page, pageSize)).toList(), UserDTO.class);
-    }
-    @Override
-    public Optional<UserDTO> findByEmail(String email) {
-        var userExist = Optional.ofNullable(userRepository.findUserByEmail(email)
-                .orElseThrow(() -> new ObjectNotFoundException(NOT_EXIST)));
-        return Optional.of(MapperDTO.parseObject(Optional.of(userExist.get()), UserDTO.class));
+                userRepository.findAll(PageRequest.of(page, pageSize)).toList(), UserDTOResponse.class);
     }
     @Override
     public Optional<UserDTOResponse> findById(Integer id) {
-        var userExist = Optional.ofNullable(userRepository.findById(id)
+        Optional<User> userExist = Optional.ofNullable(userRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException(NOT_EXIST)));
+
         return Optional.ofNullable(MapperDTO.parseObject(Optional.of(userExist.get()), UserDTOResponse.class));
     }
 
@@ -74,23 +71,23 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDTO update(UserDTO userDTO, Integer id) {
         userDTO.setId_user(id);
-      //  Optional<UserDTO> oldUser = findUserById(id);
 
-//        if (!userDTO.getPassword().equals(oldUser.get().getPassword())) {
-//            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-//        }
-        validToEmailAndCpf(userDTO);
+        validCpf(userDTO);
+        validEmail(userDTO);
 
         User newUser = new User();
         BeanUtils.copyProperties(userDTO, newUser);
         return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
     }
-    private void validToEmailAndCpf(UserDTO dto) {
+    private void validCpf(UserDTO dto) {
         Optional<User> obj = userRepository.findByCpf(dto.getCpf());
         if (obj.isPresent() && !Objects.equals(obj.get().getId_user(), dto.getId_user())) {
             throw new DataIntegrityException(CPF_ALREADY_EXIST);
         }
-        obj = userRepository.findByEmail(dto.getEmail());
+    }
+
+    private void validEmail(UserDTO dto){
+        Optional<User> obj = userRepository.findByEmail(dto.getEmail());
         if (obj.isPresent() && !Objects.equals(obj.get().getId_user(), dto.getId_user())) {
             throw new DataIntegrityException(EMAIL_ALREADY_EXIST);
         }
