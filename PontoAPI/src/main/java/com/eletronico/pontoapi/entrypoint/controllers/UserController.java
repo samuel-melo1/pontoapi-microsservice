@@ -47,8 +47,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer cpf) {
-        return ResponseEntity.ok(service.update(dto, cpf));
+    public ResponseEntity<Object> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer cpf) {
+        service.update(dto, cpf);
+        return ResponseEntity.ok().build();
     }
 
 }

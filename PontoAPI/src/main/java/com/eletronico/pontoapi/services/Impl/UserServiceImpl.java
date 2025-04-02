@@ -51,7 +51,9 @@ public class UserServiceImpl implements UserService {
                 .departamento(userDTO.getDepartamento())
                 .name(userDTO.getName())
                 .permissions(userDTO.getPermissions()).build();
+
         userRepository.save(newUser);
+
         return newUser.getId_user();
     }
     @Override
@@ -69,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDTO update(UserDTO userDTO, Integer id) {
+    public void update(UserDTO userDTO, Integer id) {
         userDTO.setId_user(id);
 
         validCpf(userDTO);
@@ -77,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
         User newUser = new User();
         BeanUtils.copyProperties(userDTO, newUser);
-        return MapperDTO.parseObject(userRepository.save(newUser), UserDTO.class);
+        userRepository.save(newUser);
     }
     private void validCpf(UserDTO dto) {
         Optional<User> obj = userRepository.findByCpf(dto.getCpf());

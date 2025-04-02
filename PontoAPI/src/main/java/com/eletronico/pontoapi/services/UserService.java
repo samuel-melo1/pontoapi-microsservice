@@ -9,7 +9,7 @@ public interface UserService {
     Integer saveUser(UserDTO dto);
 
     List<UserDTOResponse> findAll(Integer page, Integer pageSize);
-    UserDTO update(UserDTO dto, Integer id);
+    void update(UserDTO dto, Integer id);
 
     Optional<UserDTOResponse> findById(Integer id);
 }
