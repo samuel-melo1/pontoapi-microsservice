@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
                 .permissions(userDTO.getPermissions()).build();
 
         userRepository.save(newUser);
-
         return newUser.getId_user();
     }
     @Override

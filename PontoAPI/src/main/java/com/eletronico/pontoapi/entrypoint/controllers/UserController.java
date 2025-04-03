@@ -30,7 +30,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<Object> saveUser(@Validated(OnCreate.class) @RequestBody @Valid UserDTO userDTO) {
         int id_user = service.saveUser(userDTO);
         URI uri = ServletUriComponentsBuilder.
                 fromCurrentRequest().path("/{id}").buildAndExpand(id_user).toUri();
@@ -38,18 +38,19 @@ public class UserController {
     }
     @GetMapping
     public ResponseEntity<List<UserDTOResponse>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                 @RequestParam(name = "size", defaultValue = "10") int size) {
+                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok().body(service.findAll(page, size));
     }
+
     @GetMapping("/{userId}")
     public ResponseEntity<Optional<UserDTOResponse>> findByID(@PathVariable("userId") Integer id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto, @PathVariable("id") Integer cpf) {
+    @PutMapping("/{cpf}")
+    public ResponseEntity<Object> updateUser(@Validated(OnUpdate.class) @RequestBody @Valid UserDTO dto,
+                                             @PathVariable("cpf") Integer cpf) {
         service.update(dto, cpf);
         return ResponseEntity.ok().build();
     }
-
 }
